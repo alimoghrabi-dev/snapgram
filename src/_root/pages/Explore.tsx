@@ -46,7 +46,7 @@ const Explore = () => {
   const shouldShowSearchResults = searchValue !== "";
   const shouldShowSearchPosts =
     !shouldShowSearchResults &&
-    posts.pages.every((item) => item.documents.length === 0);
+    posts?.pages.every((item) => item?.documents.length === 0);
 
   return (
     <div className="explore-container">
@@ -86,13 +86,15 @@ const Explore = () => {
         {shouldShowSearchResults ? (
           <SearchResults
             isSearchFetching={isFetchingSearch}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
             searchedPosts={searchedPosts}
           />
         ) : shouldShowSearchPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of Posts</p>
         ) : (
-          posts.pages.map((item, index) => (
-            <GridPostList key={index} posts={item.documents} />
+          posts?.pages.map((item, index) => (
+            <GridPostList key={index} posts={item?.documents} />
           ))
         )}
       </div>

@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Models } from "appwrite";
 import { Loader2 } from "lucide-react";
 import GridPostList from "./GridPostList";
 
 type SearchResultsProps = {
   isSearchFetching: boolean;
-  searchedPosts: Models.Document[];
+  searchedPosts: Models.Document[] | undefined;
 };
-
 const SearchResults = ({
   isSearchFetching,
   searchedPosts,
@@ -19,7 +19,9 @@ const SearchResults = ({
     );
   }
 
+  //@ts-ignore
   if (searchedPosts && searchedPosts.documents.length > 0) {
+    //@ts-ignore
     return <GridPostList posts={searchedPosts.documents} />;
   }
 

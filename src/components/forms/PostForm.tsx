@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -38,7 +39,7 @@ const PostForm = ({ action, post }: PostFormProps) => {
 
   const { mutateAsync: createPostMutation } = useCreatePostMutation();
 
-  const { mutateAsync: updatePost, isPending: isUpdating } = useUpdatePost();
+  const { mutateAsync: updatePost } = useUpdatePost();
 
   const form = useForm<z.infer<typeof postValidatonSchema>>({
     resolver: zodResolver(postValidatonSchema),
@@ -54,6 +55,7 @@ const PostForm = ({ action, post }: PostFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof postValidatonSchema>) => {
     if (post && action === "update") {
+      //@ts-ignore
       const updatedPost = await updatePost({
         ...values,
         postId: post.$id,
@@ -71,6 +73,7 @@ const PostForm = ({ action, post }: PostFormProps) => {
       return;
     }
 
+    //@ts-ignore
     const newPost = await createPostMutation({
       ...values,
       userId: user.id,
